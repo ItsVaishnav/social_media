@@ -1,17 +1,30 @@
-import Header from "./Components/Header"
-import Footer from "./Components/Footer"
-import SideBar from "./Components/SideBar"
-import './App.css';
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import SideBar from "./Components/SideBar";
+import "./App.css";
+import CreatePost from "./Components/CreatePost";
+import PostList from "./Components/PostList";
+import { useState } from "react";
+import PostListProvider from "./store/post-list-provider";
 function App() {
+  const [selectedTab, setSelectedTab] = useState("Home");
+
   return (
-    <div className="app_container">
-        <SideBar></SideBar>
+    <PostListProvider>
+      <div className="app_container">
+        <SideBar setSelectedTab={setSelectedTab}></SideBar>
         <div className="content">
-        <Header></Header>
-        <Footer></Footer>
+          <Header></Header>
+          {selectedTab === "Home" ? (
+            <PostList></PostList>
+          ) : (
+            <CreatePost></CreatePost>
+          )}
+          <Footer></Footer>
         </div>
-    </div>
-  )
+      </div>
+    </PostListProvider>
+  );
 }
 
-export default App
+export default App;
