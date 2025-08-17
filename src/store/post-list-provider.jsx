@@ -14,6 +14,8 @@ const postListReducer = (currentPostList, action) => {
     );
   } else if (action.type === "ADD_POST") {
     UpdatedPostList = [action.payload, ...currentPostList];
+  } else if (action.type === "ADD_POSTS") {
+    UpdatedPostList = action.payload;
   }
   return UpdatedPostList;
 };
@@ -21,7 +23,7 @@ const postListReducer = (currentPostList, action) => {
 const PostListProvider = ({ children }) => {
   const [postList, dispatchPostList] = useReducer(
     postListReducer,
-    DEFAULT_POST
+    []
   );
 
   const addPost = (postDetails) => {
@@ -38,6 +40,17 @@ const PostListProvider = ({ children }) => {
     };
     dispatchPostList(action);
   };
+
+const addInitialPosts = (data) => {
+    // const action = {
+    //   type: "ADD_POST",
+    //   payload: data,
+    // };
+    // dispatchPostList(action);
+    console.log(data);
+  };
+
+
   const deletePost = (id) => {
     const action = {
       type: "DELETE_POST",
@@ -48,29 +61,11 @@ const PostListProvider = ({ children }) => {
     dispatchPostList(action);
   };
   return (
-    <PostListContext.Provider value={{ postList, addPost, deletePost }}>
+    <PostListContext.Provider value={{ postList, addPost, deletePost , addInitialPosts }}>
       {children}
     </PostListContext.Provider>
   );
 };
 
-const DEFAULT_POST = [
-  {
-    id: "1",
-    title: "Going To Satara",
-    body: "I am going to satara on the vecation of ganpati bappa",
-    reactions: 6,
-    tags: ["bappa", "satara", "Home Town"],
-    userId: "user-31",
-  },
-  {
-    id: "2",
-    title: "Watching Movie",
-    body: "Thi smovie is so amazing and it has mind blowing acton seens",
-    reactions: 20,
-    tags: ["movie", "Action", "Chill", "Movie_Time"],
-    userId: "user-20",
-  },
-];
 
 export default PostListProvider;
