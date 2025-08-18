@@ -5,16 +5,24 @@ import WelcomeMessage from "./WelcomeMessage";
 import Loding from "./Loding";
 
 export default function PostList() {
+
   const { postList , addInitialPosts} = useContext(PostListContext);
   const [fetching , setFetching] = useState(false);
   useEffect(()=>{
+    const controller = new AbortController();
+    const signal = controller.signal;
     setFetching(true)
-    fetch("https://dummyjson.com/posts")
+    fetch("https://dummyjson.com/posts",{signal})
       .then((res) => res.json())
       .then((data)=> {
         addInitialPosts(data.posts);
         setFetching(false);
       });
+
+      return () => {
+        console.log("Cleaning the posts ..!");
+        controller.abort();
+      }
   },[]);
 
   return (
