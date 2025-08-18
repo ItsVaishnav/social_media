@@ -70,5 +70,4 @@ const addInitialPosts = (data) => {
   );
 };
 
-
 export default PostListProvider;
