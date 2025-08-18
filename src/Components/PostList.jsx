@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Post from "./Post";
 import { PostListContext } from "../store/post-list-provider";
 import WelcomeMessage from "./WelcomeMessage";
-import Loding from "./Loding";
+import Loding from "./Loding";  
 
 export default function PostList() {
 
