@@ -8,7 +8,8 @@ export default function CreatePost() {
     const PostTitle = useRef();
     const PostBody = useRef();
     const PostTags = useRef();
-    const PostReactions = useRef();
+    const PostReactionsLikes = useRef();
+    const PostReactionsDislikes = useRef();
 
     const handleOnSubmit = (event) => {
       event.preventDefault();
@@ -17,7 +18,10 @@ export default function CreatePost() {
         PostTitle : PostTitle.current.value,
         PostBody : PostBody.current.value,
         PostTags : PostTags.current.value.trim().split(" "),
-        PostReactions : PostReactions.current.value,
+        PostReactions : {
+          likes : PostReactionsLikes.current.value,
+          dislikes : PostReactionsDislikes.current.value,
+        },
       }
       addPost(postDetails);
     }
@@ -62,15 +66,27 @@ export default function CreatePost() {
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="reactions" className="form-label">
-          Reactions
+        <label htmlFor="likes" className="form-label">
+          likes
         </label>
         <input
           type="number"
           className="form-control"
-          id="reactions"
+          id="likes"
           placeholder="How many peoples are reacted on this Post"
-          ref={PostReactions}
+          ref={PostReactionsLikes}
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="dislikes" className="form-label">
+          Dislikes
+        </label>
+        <input
+          type="number"
+          className="form-control"
+          id="dislikes"
+          placeholder="How many peoples are reacted on this Post"
+          ref={PostReactionsDislikes}
         />
       </div>
       <div className="mb-3">

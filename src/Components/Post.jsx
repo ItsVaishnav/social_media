@@ -17,7 +17,7 @@ export default function Post({ post }) {
         {post.tags.map(ele => <span key={ele} className="badge text-bg-info m-1">ele</span>)}
         
         <div className="alert alert-success" role="alert">
-          This Post is Reacted by {post.reactions} People
+          This Post is Reacted by {post.reactions.likes+post.reactions.dislikes} People Liked By {post.reactions.likes} and disliked by {post.reactions.dislikes}
         </div>
       </div>
     </div>

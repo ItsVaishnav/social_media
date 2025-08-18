@@ -33,7 +33,10 @@ const PostListProvider = ({ children }) => {
         id: new Date(),
         title: postDetails.PostTitle,
         body: postDetails.PostBody,
-        reactions: postDetails.PostReactions,
+        reactions: {
+          likes : postDetails.PostReactions.likes,
+          dislikes: postDetails.PostReactions.dislikes
+        },
         tags: postDetails.PostTags,
         userId: postDetails.UserId,
       },
@@ -42,11 +45,11 @@ const PostListProvider = ({ children }) => {
   };
 
 const addInitialPosts = (data) => {
-    // const action = {
-    //   type: "ADD_POST",
-    //   payload: data,
-    // };
-    // dispatchPostList(action);
+    const action = {
+      type: "ADD_POSTS",
+      payload: data,
+    };
+    dispatchPostList(action);
     console.log(data);
   };
 
